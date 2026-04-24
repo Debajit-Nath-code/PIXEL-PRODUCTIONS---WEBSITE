@@ -287,13 +287,13 @@ const Navbar = () => {
       </div>
 
       <div className="flex items-center space-x-4 md:space-x-6">
-        <a href="#" className="hover:text-brand-yellow transition-colors" aria-label="Instagram">
+        <a href="https://www.instagram.com/pixelproductions01" className="hover:text-brand-yellow transition-colors" aria-label="Instagram">
           <Instagram className="w-5 h-5" />
         </a>
-        <a href="#" className="hover:text-brand-yellow transition-colors" aria-label="Twitter">
+        <a href="https://x.com/PixelProdu62210" className="hover:text-brand-yellow transition-colors" aria-label="Twitter">
           <Twitter className="w-5 h-5" />
         </a>
-        <a href="#" className="hover:text-brand-yellow transition-colors" aria-label="LinkedIn">
+        <a href="www.linkedin.com/in/pixel-productions-74a76838b" className="hover:text-brand-yellow transition-colors" aria-label="LinkedIn">
           <Linkedin className="w-5 h-5" />
         </a>
       </div>
@@ -387,7 +387,7 @@ const Hero = () => {
         <motion.div 
           initial={{ scaleX: 0 }}
           animate={{ scaleX: 1 }}
-          transition={{ duration: 1, ease: "circOut", delay: 0.2 }}
+          transition={{ duration: 1, ease: "circOut", delay: 0.6 }}
           className="absolute top-1/2 left-0 w-[80%] md:w-[60%] h-32 md:h-64 bg-brand-purple -translate-y-1/2 z-0 origin-left"
         />
 
@@ -401,8 +401,8 @@ const Hero = () => {
           <div className="aspect-[16/9] bg-gray-200 relative overflow-hidden">
             <ProjectVideo 
                project={{
-                   video: "https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
-                   img: "https://picsum.photos/seed/cyberpunk/1920/1080?grayscale"
+                   video: "https://res.cloudinary.com/dcy2gdxzq/video/upload/v1777024145/SHOWREEL_2026_PIXEL_PRODUCTIONS_compressed_yrsfqy.mp4",
+                   img: "https://res.cloudinary.com/dcy2gdxzq/image/upload/v1777024551/thumb_1_ziaxjd.png"
                }}
                className="w-full h-full"
                isHero={true}
@@ -435,10 +435,10 @@ const Hero = () => {
 
 const Projects = () => {
   const projects = [
-    { title: "Neon Nights", category: "Commercial", year: "'25", img: "https://picsum.photos/seed/neon/800/1200?grayscale", video: "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" },
-    { title: "Echoes of Silence", category: "Documentary", year: "'25", img: "https://picsum.photos/seed/silence/800/1200?grayscale", video: "https://storage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4" },
-    { title: "Velocity", category: "Automotive", year: "'24", img: "https://picsum.photos/seed/car/1000/600?grayscale", video: "https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" },
-    { title: "Vogue Subculture", category: "Fashion", year: "'24", img: "https://picsum.photos/seed/fashion/800/600?grayscale", video: "https://storage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4" },
+    { title: "Ecom Accelarator", category: "High Paced", year: "'25", img: "https://res.cloudinary.com/dcy2gdxzq/image/upload/v1777025983/short_1_finished.00_00_17_26.Still001_pnjhch.png", video: "https://res.cloudinary.com/dcy2gdxzq/video/upload/v1777025905/short_1_finished_qbvi86.mp4" },
+    { title: "Trading Guide", category: "Smooth Animations", year: "'25", img: "https://res.cloudinary.com/dcy2gdxzq/image/upload/v1777025976/O-_EDITED_VIDEO.00_00_07_06.Still001_akoovs.png", video: "https://res.cloudinary.com/dcy2gdxzq/video/upload/v1777025803/O-_EDITED_VIDEO_okdfp9.mp4" },
+    { title: "Dead Internet", category: "Explainer", year: "'24", img: "https://res.cloudinary.com/dcy2gdxzq/image/upload/v1777026679/PIXEL_PRODUCTIONS_-_ACCORDING_TO_NICOLE_SAMPLE_VIDEO.00_00_19_01.Still001_lvnoqh.png", video: "https://res.cloudinary.com/dcy2gdxzq/video/upload/v1777026973/PIXEL_PRODUCTIONS_-_ACCORDING_TO_NICOLE_SAMPLE_VIDEO_efhjsv.mp4" },
+    { title: "Unique Re-edit", category: "Motion Graphics", year: "'24", img: "https://res.cloudinary.com/dcy2gdxzq/image/upload/v1777026676/PIXEL_PRODUCTIONS_-_ACCORDING_TO_NICOLE_SAMPLE_VIDEO.00_00_18_23.Still002_b8vj4t.png", video: "https://res.cloudinary.com/dcy2gdxzq/video/upload/v1777026926/PIXEL_PRODUCTIONS_-_ACCORDING_TO_NICOLE_SAMPLE_VIDEO_1_znyumz.mp4" },
   ];
 
   return (
