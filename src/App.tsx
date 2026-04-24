@@ -238,8 +238,8 @@ const Hero = () => {
           <div className="aspect-[16/9] bg-gray-200 relative overflow-hidden">
             <ProjectVideo 
                project={{
-                   video: "https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
-                   img: "https://picsum.photos/seed/cyberpunk/1920/1080?grayscale"
+                   video: "https://res.cloudinary.com/dcy2gdxzq/video/upload/v1777024145/SHOWREEL_2026_PIXEL_PRODUCTIONS_compressed_yrsfqy.mp4",
+                   img: "https://res.cloudinary.com/dcy2gdxzq/image/upload/v1777024551/thumb_1_ziaxjd.png"
                }}
                className="w-full h-full"
                isHero={true}
