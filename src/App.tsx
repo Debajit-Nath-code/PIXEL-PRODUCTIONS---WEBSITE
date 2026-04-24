@@ -272,7 +272,7 @@ const Projects = () => {
     { title: "Neon Nights", category: "Commercial", year: "'25", img: "https://picsum.photos/seed/neon/800/1200?grayscale", video: "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" },
     { title: "Echoes of Silence", category: "Documentary", year: "'25", img: "https://picsum.photos/seed/silence/800/1200?grayscale", video: "https://storage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4" },
     { title: "Velocity", category: "Automotive", year: "'24", img: "https://picsum.photos/seed/car/1000/600?grayscale", video: "https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" },
-    { title: "Vogue Subculture", category: "Fashion", year: "'24", img: "https://picsum.photos/seed/fashion/800/600?grayscale", video: "https://storage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4" },
+    { title: "Vogue Subculture", category: "Fashion", year: "'24", img: "https://picsum.photos/seed/fashion/800/600?grayscale", video: "https://drive.google.com/uc?export=download&id=1E_ZDt8ulI0Ko5tQXZav5TVAXXNWuopBn" },
   ];
 
   return (
