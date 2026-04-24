@@ -5,7 +5,7 @@ import { Routes, Route, Link, useParams, useLocation } from 'react-router-dom';
 
 // --- COMPONENTS ---
 
-const ProjectVideo = ({ project, className }: { project: any, className: string }) => {
+const ProjectVideo = ({ project, className, isHero = false }: { project: any, className: string, isHero?: boolean }) => {
     const [isPlaying, setIsPlaying] = useState(false);
     const [isMuted, setIsMuted] = useState(false);
     const [isBuffering, setIsBuffering] = useState(false);
@@ -41,11 +41,16 @@ const ProjectVideo = ({ project, className }: { project: any, className: string 
 
     return (
         <div className={`relative overflow-hidden bg-gray-100 group cursor-pointer ${className}`} onClick={togglePlay}>
-            {!isPlaying && (
+            {!isPlaying && !isHero && (
                 <div className="absolute inset-0 bg-brand-purple/90 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10 flex items-center justify-center pointer-events-none">
                     <span className="bg-brand-yellow text-black font-display font-bold px-6 py-3 uppercase text-sm tracking-widest flex items-center gap-2">
                         Play Video <Play className="w-4 h-4 fill-black text-black" />
                     </span>
+                </div>
+            )}
+            {!isPlaying && isHero && (
+                <div className="absolute bottom-6 left-6 md:bottom-12 md:left-12 aspect-square w-16 md:w-24 bg-brand-yellow flex items-center justify-center group-hover:scale-110 transition-transform cursor-pointer shadow-lg z-10 pointer-events-none">
+                  <Play className="fill-black text-black w-6 h-6 md:w-10 md:h-10 ml-1" />
                 </div>
             )}
             
@@ -231,21 +236,19 @@ const Hero = () => {
            className="relative z-10 w-full md:w-4/5 lg:w-3/4 xl:w-2/3 ml-auto group"
         >
           <div className="aspect-[16/9] bg-gray-200 relative overflow-hidden">
-            <img 
-              src="https://drive.google.com/uc?export=download&id=1E_ZDt8ulI0Ko5tQXZav5TVAXXNWuopBn" 
-              alt="Showreel Cover" 
-              className="w-full h-full object-cover grayscale mix-blend-multiply opacity-80 group-hover:scale-105 transition-transform duration-1000 ease-out"
-              referrerPolicy="no-referrer"
+            <ProjectVideo 
+               project={{
+                   video: "https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+                   img: "https://picsum.photos/seed/cyberpunk/1920/1080?grayscale"
+               }}
+               className="w-full h-full"
+               isHero={true}
             />
-            {/* Play Button */}
-            <div className="absolute bottom-6 left-6 md:bottom-12 md:left-12 aspect-square w-16 md:w-24 bg-brand-yellow flex items-center justify-center hover:scale-110 transition-transform cursor-pointer shadow-lg">
-              <Play className="fill-black text-black w-6 h-6 md:w-10 md:h-10 ml-1" />
-            </div>
             
             {/* Overlay Info on Image */}
-            <div className="absolute top-6 right-6 md:top-12 md:right-12 text-right">
-                <p className="font-display font-bold text-white text-xs md:text-sm tracking-widest uppercase">Showreel</p>
-                <p className="font-mono text-white/70 text-[10px] md:text-xs pt-1">2026 // 02:45</p>
+            <div className="absolute top-6 right-6 md:top-12 md:right-12 text-right z-20 pointer-events-none">
+                <p className="font-display font-bold text-white text-xs md:text-sm tracking-widest uppercase shadow-black drop-shadow-md">Showreel</p>
+                <p className="font-mono text-white/90 text-[10px] md:text-xs pt-1 drop-shadow-md">2026 // 02:45</p>
             </div>
           </div>
         </motion.div>
@@ -272,7 +275,7 @@ const Projects = () => {
     { title: "Neon Nights", category: "Commercial", year: "'25", img: "https://picsum.photos/seed/neon/800/1200?grayscale", video: "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" },
     { title: "Echoes of Silence", category: "Documentary", year: "'25", img: "https://picsum.photos/seed/silence/800/1200?grayscale", video: "https://storage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4" },
     { title: "Velocity", category: "Automotive", year: "'24", img: "https://picsum.photos/seed/car/1000/600?grayscale", video: "https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" },
-    { title: "Vogue Subculture", category: "Fashion", year: "'24", img: "https://picsum.photos/seed/fashion/800/600?grayscale", video: "https://drive.google.com/uc?export=download&id=1E_ZDt8ulI0Ko5tQXZav5TVAXXNWuopBn" },
+    { title: "Vogue Subculture", category: "Fashion", year: "'24", img: "https://picsum.photos/seed/fashion/800/600?grayscale", video: "https://storage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4" },
   ];
 
   return (
