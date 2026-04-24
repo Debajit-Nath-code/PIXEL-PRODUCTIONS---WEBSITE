@@ -1,15 +1,76 @@
-import { motion, useScroll, useTransform } from 'motion/react';
-import { ArrowRight, ArrowUpRight, Play, Mail, Instagram, Twitter, Linkedin, ArrowLeft, Pause, Volume2, VolumeX } from 'lucide-react';
-import React, { useRef, useEffect, useState } from 'react';
+import { motion, useScroll, useTransform, AnimatePresence } from 'motion/react';
+import { ArrowRight, ArrowUpRight, Play, Mail, Instagram, Twitter, Linkedin, ArrowLeft, Pause, Volume2, VolumeX, X } from 'lucide-react';
+import React, { useRef, useEffect, useState, useId } from 'react';
 import { Routes, Route, Link, useParams, useLocation } from 'react-router-dom';
 
 // --- COMPONENTS ---
 
-const ProjectVideo = ({ project, className, isHero = false }: { project: any, className: string, isHero?: boolean }) => {
+const ProjectVideo = ({ project, className, isHero = false, useModal = false }: { project: any, className: string, isHero?: boolean, useModal?: boolean }) => {
     const [isPlaying, setIsPlaying] = useState(false);
     const [isMuted, setIsMuted] = useState(false);
     const [isBuffering, setIsBuffering] = useState(false);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [progress, setProgress] = useState(0);
+    const [duration, setDuration] = useState(0);
+    const [isDragging, setIsDragging] = useState(false);
+    
     const videoRef = useRef<HTMLVideoElement>(null);
+    const progressBarRef = useRef<HTMLDivElement>(null);
+    const layoutId = useId();
+
+    const formatTime = (time: number) => {
+        if (isNaN(time)) return "0:00";
+        const mins = Math.floor(time / 60);
+        const secs = Math.floor(time % 60);
+        return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+    };
+
+    const updateProgress = (clientX: number) => {
+        if (progressBarRef.current && videoRef.current && duration > 0) {
+            const rect = progressBarRef.current.getBoundingClientRect();
+            let pos = (clientX - rect.left) / rect.width;
+            pos = Math.max(0, Math.min(1, pos));
+            videoRef.current.currentTime = pos * duration;
+            setProgress(pos * duration);
+        }
+    };
+
+    const handleProgressMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
+        e.stopPropagation();
+        setIsDragging(true);
+        updateProgress(e.clientX);
+    };
+
+    useEffect(() => {
+        const handleMouseMove = (e: MouseEvent) => {
+            if (isDragging) {
+                updateProgress(e.clientX);
+            }
+        };
+
+        const handleMouseUp = () => {
+            setIsDragging(false);
+        };
+
+        if (isDragging) {
+            window.addEventListener('mousemove', handleMouseMove);
+            window.addEventListener('mouseup', handleMouseUp);
+        }
+
+        return () => {
+            window.removeEventListener('mousemove', handleMouseMove);
+            window.removeEventListener('mouseup', handleMouseUp);
+        };
+    }, [isDragging, duration]);
+
+    useEffect(() => {
+        if (useModal && isModalOpen && videoRef.current) {
+            const playPromise = videoRef.current.play();
+            if (playPromise !== undefined) {
+                playPromise.then(() => setIsPlaying(true)).catch(() => setIsPlaying(false));
+            }
+        }
+    }, [isModalOpen, useModal]);
 
     const togglePlay = (e?: React.MouseEvent) => {
         if (e) {
@@ -39,76 +100,178 @@ const ProjectVideo = ({ project, className, isHero = false }: { project: any, cl
         }
     };
 
-    return (
-        <div className={`relative overflow-hidden bg-gray-100 group cursor-pointer ${className}`} onClick={togglePlay}>
-            {!isPlaying && !isHero && (
-                <div className="absolute inset-0 bg-brand-purple/90 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10 flex items-center justify-center pointer-events-none">
-                    <span className="bg-brand-yellow text-black font-display font-bold px-6 py-3 uppercase text-sm tracking-widest flex items-center gap-2">
-                        Play Video <Play className="w-4 h-4 fill-black text-black" />
-                    </span>
-                </div>
-            )}
-            {!isPlaying && isHero && (
-                <div className="absolute bottom-6 left-6 md:bottom-12 md:left-12 aspect-square w-16 md:w-24 bg-brand-yellow flex items-center justify-center group-hover:scale-110 transition-transform cursor-pointer shadow-lg z-10 pointer-events-none">
-                  <Play className="fill-black text-black w-6 h-6 md:w-10 md:h-10 ml-1" />
-                </div>
-            )}
-            
-            {/* Custom Control Bar */}
-            <div className={`absolute bottom-0 left-0 right-0 p-4 md:p-6 bg-gradient-to-t from-black/80 to-transparent z-20 flex justify-between items-center transition-opacity duration-300 ${isPlaying ? 'opacity-0 group-hover:opacity-100' : 'opacity-0'}`}>
-                {/* Play/Pause Button */}
+    const handleThumbnailClick = (e: React.MouseEvent) => {
+        e.preventDefault();
+        e.stopPropagation();
+        if (useModal) {
+            setIsModalOpen(true);
+        } else {
+            togglePlay(e);
+        }
+    };
+
+    const closeModal = (e: React.MouseEvent) => {
+        e.preventDefault();
+        e.stopPropagation();
+        if (videoRef.current) {
+            videoRef.current.pause();
+        }
+        setIsPlaying(false);
+        setIsModalOpen(false);
+    };
+
+    const renderControls = () => (
+        <div 
+            className={`absolute bottom-0 left-0 right-0 p-4 md:p-6 bg-gradient-to-t from-black/80 to-transparent z-20 flex flex-col gap-4 transition-opacity duration-300 ${isPlaying || isDragging ? 'opacity-0 group-hover:opacity-100' : 'opacity-0'}`}
+            onClick={(e) => e.stopPropagation()}
+        >
+            <div className="flex justify-between items-center">
                 <button 
-                  onClick={togglePlay} 
-                  className="w-10 h-10 md:w-12 md:h-12 bg-brand-yellow text-black flex items-center justify-center hover:bg-white hover:scale-105 transition-all shadow-lg"
-                  aria-label={isPlaying ? "Pause" : "Play"}
+                    onClick={togglePlay} 
+                    className="w-10 h-10 md:w-12 md:h-12 bg-brand-yellow text-black flex items-center justify-center hover:bg-white hover:scale-105 transition-all shadow-lg"
+                    aria-label={isPlaying ? "Pause" : "Play"}
                 >
                     {isPlaying ? <Pause className="w-5 h-5 fill-black text-black" /> : <Play className="w-5 h-5 fill-black text-black ml-1" />}
                 </button>
-
-                {/* Mute/Unmute Button */}
                 <button 
-                  onClick={toggleMute} 
-                  className="w-10 h-10 md:w-12 md:h-12 bg-black/50 backdrop-blur text-brand-yellow border border-brand-yellow flex items-center justify-center hover:bg-brand-yellow hover:text-black transition-all shadow-lg"
-                  aria-label={isMuted ? "Unmute" : "Mute"}
+                    onClick={toggleMute} 
+                    className="w-10 h-10 md:w-12 md:h-12 bg-black/50 backdrop-blur text-brand-yellow border border-brand-yellow flex items-center justify-center hover:bg-brand-yellow hover:text-black transition-all shadow-lg"
+                    aria-label={isMuted ? "Unmute" : "Mute"}
                 >
                     {isMuted ? <VolumeX className="w-5 h-5" /> : <Volume2 className="w-5 h-5" />}
                 </button>
             </div>
-
-            {/* Pixel Loading Indicator */}
-            {isBuffering && (
-                <div className="absolute inset-0 z-30 flex items-center justify-center bg-black/40 pointer-events-none transition-opacity duration-300">
-                    <div className="grid grid-cols-3 gap-1 p-3 bg-black/60 backdrop-blur-md border border-gray-800">
-                        {[...Array(9)].map((_, i) => (
-                            <motion.div
-                                key={i}
-                                className="bg-brand-yellow w-2.5 h-2.5 md:w-3 md:h-3"
-                                animate={{ opacity: [0.1, 1, 0.1], scale: [0.8, 1, 0.8] }}
-                                transition={{
-                                    duration: 0.9,
-                                    repeat: Infinity,
-                                    delay: i * 0.1,
-                                    ease: "easeInOut"
-                                }}
-                            />
-                        ))}
-                    </div>
+            <div className="flex items-center gap-3 text-white font-mono text-[10px] md:text-xs">
+                <span>{formatTime(progress)}</span>
+                <div 
+                    ref={progressBarRef}
+                    className="flex-1 h-2 md:h-3 cursor-pointer relative group/progress flex items-center py-2"
+                    onMouseDown={handleProgressMouseDown}
+                >
+                    <div className="absolute left-0 right-0 h-1 md:h-1.5 bg-white/20 pointer-events-none" />
+                    <div 
+                        className="absolute left-0 h-1 md:h-1.5 bg-brand-yellow pointer-events-none" 
+                        style={{ width: `${duration > 0 ? (progress / duration) * 100 : 0}%` }} 
+                    />
+                    <div 
+                        className="absolute w-3 h-3 md:w-4 md:h-4 bg-white rounded-full pointer-events-none opacity-0 group-hover/progress:opacity-100 transition-opacity shadow-sm"
+                        style={{ left: `calc(${duration > 0 ? (progress / duration) * 100 : 0}% - 6px)` }}
+                    />
                 </div>
-            )}
-
-            <video 
-               ref={videoRef}
-               src={project.video}
-               poster={project.img}
-               className={`w-full h-full object-cover transition-transform duration-700 ease-out ${!isPlaying ? 'grayscale opacity-90 group-hover:scale-105' : 'scale-100'}`}
-               loop
-               playsInline
-               muted={isMuted}
-               onWaiting={() => setIsBuffering(true)}
-               onPlaying={() => setIsBuffering(false)}
-               onCanPlay={() => setIsBuffering(false)}
-            />
+                <span>{formatTime(duration)}</span>
+            </div>
         </div>
+    );
+
+    const renderLoading = () => (
+        isBuffering && (
+            <div className="absolute inset-0 z-30 flex items-center justify-center bg-black/40 pointer-events-none transition-opacity duration-300">
+                <div className="grid grid-cols-3 gap-1 p-3 bg-black/60 backdrop-blur-md border border-gray-800">
+                    {[...Array(9)].map((_, i) => (
+                        <motion.div
+                            key={i}
+                            className="bg-brand-yellow w-2.5 h-2.5 md:w-3 md:h-3"
+                            animate={{ opacity: [0.1, 1, 0.1], scale: [0.8, 1, 0.8] }}
+                            transition={{ duration: 0.9, repeat: Infinity, delay: i * 0.1, ease: "easeInOut" }}
+                        />
+                    ))}
+                </div>
+            </div>
+        )
+    );
+
+    return (
+        <>
+            <motion.div 
+                layoutId={useModal ? `video-container-${layoutId}` : undefined}
+                className={`relative overflow-hidden bg-gray-100 group cursor-pointer ${className}`} 
+                onClick={handleThumbnailClick}
+            >
+                {!isPlaying && !isHero && (
+                    <div className="absolute inset-0 bg-brand-purple/90 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10 flex items-center justify-center pointer-events-none">
+                        <span className="bg-brand-yellow text-black font-display font-bold px-6 py-3 uppercase text-sm tracking-widest flex items-center gap-2">
+                            Play Video <Play className="w-4 h-4 fill-black text-black" />
+                        </span>
+                    </div>
+                )}
+                {!isPlaying && isHero && (
+                    <div className="absolute bottom-6 left-6 md:bottom-12 md:left-12 aspect-square w-16 md:w-24 bg-brand-yellow flex items-center justify-center group-hover:scale-110 transition-transform cursor-pointer shadow-lg z-10 pointer-events-none">
+                        <Play className="fill-black text-black w-6 h-6 md:w-10 md:h-10 ml-1" />
+                    </div>
+                )}
+                
+                {useModal ? (
+                    <img 
+                        src={project.img} 
+                        alt={project.title} 
+                        className="w-full h-full object-cover transition-transform duration-700 ease-out grayscale opacity-90 group-hover:scale-105" 
+                        referrerPolicy="no-referrer"
+                    />
+                ) : (
+                    <>
+                        {renderControls()}
+                        {renderLoading()}
+                        <video 
+                            ref={videoRef}
+                            src={project.video}
+                            poster={project.img}
+                            className={`w-full h-full object-cover transition-transform duration-700 ease-out ${!isPlaying ? 'grayscale opacity-90 group-hover:scale-105' : 'scale-100'}`}
+                            loop
+                            playsInline
+                            muted={isMuted}
+                            onWaiting={() => setIsBuffering(true)}
+                            onPlaying={() => setIsBuffering(false)}
+                            onCanPlay={() => setIsBuffering(false)}
+                            onTimeUpdate={(e) => setProgress(e.currentTarget.currentTime)}
+                            onLoadedMetadata={(e) => setDuration(e.currentTarget.duration)}
+                        />
+                    </>
+                )}
+            </motion.div>
+
+            <AnimatePresence>
+                {useModal && isModalOpen && (
+                    <motion.div 
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.4, ease: "easeInOut" }}
+                        className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 backdrop-blur-md p-4 md:p-8"
+                        onClick={closeModal}
+                    >
+                        <button 
+                            onClick={closeModal} 
+                            className="absolute top-4 right-4 md:top-8 md:right-8 text-brand-yellow hover:text-white hover:scale-110 transition-all z-[110] bg-brand-purple/50 md:bg-brand-purple/20 p-2 rounded-full cursor-pointer border border-brand-purple hover:border-brand-yellow hover:bg-brand-purple"
+                        >
+                            <X className="w-6 h-6 md:w-8 md:h-8" />
+                        </button>
+                        <motion.div 
+                            layoutId={useModal ? `video-container-${layoutId}` : undefined}
+                            transition={{ type: "spring", damping: 25, stiffness: 200 }}
+                            className="relative max-w-full max-h-full flex items-center justify-center group rounded-lg overflow-hidden border-2 border-brand-purple shadow-[0_0_50px_-12px_rgba(157,78,221,0.5)] hover:border-brand-yellow hover:shadow-[0_0_50px_-12px_rgba(255,200,0,0.8)] transition-all duration-500 bg-black" 
+                            onClick={(e) => e.stopPropagation()}
+                        >
+                            {renderControls()}
+                            {renderLoading()}
+                            <video 
+                                ref={videoRef}
+                                src={project.video}
+                                poster={project.img}
+                                className="max-w-full max-h-[85vh] w-auto h-auto block bg-black object-contain"
+                                loop
+                                playsInline
+                                muted={isMuted}
+                                onWaiting={() => setIsBuffering(true)}
+                                onPlaying={() => setIsBuffering(false)}
+                                onCanPlay={() => setIsBuffering(false)}
+                                onTimeUpdate={(e) => setProgress(e.currentTarget.currentTime)}
+                                onLoadedMetadata={(e) => setDuration(e.currentTarget.duration)}
+                            />
+                        </motion.div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+        </>
     );
 };
 
@@ -238,8 +401,8 @@ const Hero = () => {
           <div className="aspect-[16/9] bg-gray-200 relative overflow-hidden">
             <ProjectVideo 
                project={{
-                   video: "https://res.cloudinary.com/dcy2gdxzq/video/upload/v1777024145/SHOWREEL_2026_PIXEL_PRODUCTIONS_compressed_yrsfqy.mp4",
-                   img: "https://res.cloudinary.com/dcy2gdxzq/image/upload/v1777024551/thumb_1_ziaxjd.png"
+                   video: "https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+                   img: "https://picsum.photos/seed/cyberpunk/1920/1080?grayscale"
                }}
                className="w-full h-full"
                isHero={true}
@@ -275,7 +438,7 @@ const Projects = () => {
     { title: "Neon Nights", category: "Commercial", year: "'25", img: "https://picsum.photos/seed/neon/800/1200?grayscale", video: "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" },
     { title: "Echoes of Silence", category: "Documentary", year: "'25", img: "https://picsum.photos/seed/silence/800/1200?grayscale", video: "https://storage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4" },
     { title: "Velocity", category: "Automotive", year: "'24", img: "https://picsum.photos/seed/car/1000/600?grayscale", video: "https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" },
-    { title: "Vogue Subculture", category: "Fashion", year: "'24", img: "https://picsum.photos/seed/fashion/800/600?grayscale", video: "https://res.cloudinary.com/dcy2gdxzq/video/upload/v1777024145/SHOWREEL_2026_PIXEL_PRODUCTIONS_compressed_yrsfqy.mp4" },
+    { title: "Vogue Subculture", category: "Fashion", year: "'24", img: "https://picsum.photos/seed/fashion/800/600?grayscale", video: "https://storage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4" },
   ];
 
   return (
@@ -302,6 +465,7 @@ const Projects = () => {
               <ProjectVideo 
                  project={project} 
                  className={`${idx >= 2 ? 'aspect-video md:aspect-[16/9]' : 'aspect-[9/16]'}`} 
+                 useModal={true}
               />
               
               <div className="flex justify-between items-start mt-6">
@@ -507,7 +671,7 @@ const ServicePage = () => {
                      transition={{ duration: 0.6, delay: idx * 0.1 }}
                      className="group cursor-pointer"
                    >
-                     <ProjectVideo project={project} className="aspect-video md:aspect-[4/5]" />
+                     <ProjectVideo project={project} className="aspect-video md:aspect-[4/5]" useModal={true} />
                      <div className="flex justify-between items-start mt-6">
                         <div>
                             <h3 className="font-display font-bold text-2xl uppercase tracking-tight">{project.title}</h3>
