@@ -595,7 +595,7 @@ const Contact = () => {
                     Let's Build.
                 </h2>
                 
-                <a href="mailto:hello@pixelproductions.com" className="inline-flex items-center gap-4 bg-brand-yellow text-black px-8 py-5 font-bold uppercase tracking-widest text-sm hover:scale-105 transition-transform hover:shadow-[0_0_40px_rgba(255,214,0,0.4)]">
+                <a href="mailto:pixelproductions170@gmail.com" className="inline-flex items-center gap-4 bg-brand-yellow text-black px-8 py-5 font-bold uppercase tracking-widest text-sm hover:scale-105 transition-transform hover:shadow-[0_0_40px_rgba(255,214,0,0.4)]">
                    <Mail className="w-5 h-5" /> Start a Conversation
                 </a>
             </div>
