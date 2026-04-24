@@ -232,7 +232,7 @@ const Hero = () => {
         >
           <div className="aspect-[16/9] bg-gray-200 relative overflow-hidden">
             <img 
-              src="https://youtu.be/embed/eL-sTur9qbE" 
+              src="https://drive.google.com/uc?export=download&id=1E_ZDt8ulI0Ko5tQXZav5TVAXXNWuopBn" 
               alt="Showreel Cover" 
               className="w-full h-full object-cover grayscale mix-blend-multiply opacity-80 group-hover:scale-105 transition-transform duration-1000 ease-out"
               referrerPolicy="no-referrer"
