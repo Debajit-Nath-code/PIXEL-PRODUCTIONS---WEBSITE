@@ -435,10 +435,12 @@ const Hero = () => {
 
 const Projects = () => {
   const projects = [
-    { title: "Ecom Accelarator", category: "High Paced", year: "'25", img: "https://res.cloudinary.com/dcy2gdxzq/image/upload/v1777025983/short_1_finished.00_00_17_26.Still001_pnjhch.png", video: "https://res.cloudinary.com/dcy2gdxzq/video/upload/v1777025905/short_1_finished_qbvi86.mp4" },
+    { title: "Ecom Accelarator", category: "High Paced", year: "'26", img: "https://res.cloudinary.com/dcy2gdxzq/image/upload/v1777025983/short_1_finished.00_00_17_26.Still001_pnjhch.png", video: "https://res.cloudinary.com/dcy2gdxzq/video/upload/v1777025905/short_1_finished_qbvi86.mp4" },
+    { title: "Trading Guide", category: "Smooth Animations", year: "'26", img: "https://res.cloudinary.com/dcy2gdxzq/image/upload/v1777025976/O-_EDITED_VIDEO.00_00_07_06.Still001_akoovs.png", video: "https://res.cloudinary.com/dcy2gdxzq/video/upload/v1777025803/O-_EDITED_VIDEO_okdfp9.mp4" },
+    { title: "Ecom Accelarator", category: "High Paced", year: "'25", img: "https://res.cloudinary.com/dcy2gdxzq/image/upload/v1777025935/GAP_Insurance_Peep_This_-_edited_version_DENJIeditz.00_00_01_34.Still001_salekc.png", video: "https://res.cloudinary.com/dcy2gdxzq/video/upload/v1777025777/GAP_Insurance_Peep_This_-_edited_version_DENJIeditz_nu8hll.mp4" },
     { title: "Trading Guide", category: "Smooth Animations", year: "'25", img: "https://res.cloudinary.com/dcy2gdxzq/image/upload/v1777025976/O-_EDITED_VIDEO.00_00_07_06.Still001_akoovs.png", video: "https://res.cloudinary.com/dcy2gdxzq/video/upload/v1777025803/O-_EDITED_VIDEO_okdfp9.mp4" },
-    { title: "Dead Internet", category: "Explainer", year: "'24", img: "https://res.cloudinary.com/dcy2gdxzq/image/upload/v1777026679/PIXEL_PRODUCTIONS_-_ACCORDING_TO_NICOLE_SAMPLE_VIDEO.00_00_19_01.Still001_lvnoqh.png", video: "https://res.cloudinary.com/dcy2gdxzq/video/upload/v1777026973/PIXEL_PRODUCTIONS_-_ACCORDING_TO_NICOLE_SAMPLE_VIDEO_efhjsv.mp4" },
-    { title: "Unique Re-edit", category: "Motion Graphics", year: "'24", img: "https://res.cloudinary.com/dcy2gdxzq/image/upload/v1777026676/PIXEL_PRODUCTIONS_-_ACCORDING_TO_NICOLE_SAMPLE_VIDEO.00_00_18_23.Still002_b8vj4t.png", video: "https://res.cloudinary.com/dcy2gdxzq/video/upload/v1777026926/PIXEL_PRODUCTIONS_-_ACCORDING_TO_NICOLE_SAMPLE_VIDEO_1_znyumz.mp4" },
+    { title: "Dead Internet", category: "Explainer", year: "'26", img: "https://res.cloudinary.com/dcy2gdxzq/image/upload/v1777026679/PIXEL_PRODUCTIONS_-_ACCORDING_TO_NICOLE_SAMPLE_VIDEO.00_00_19_01.Still001_lvnoqh.png", video: "https://res.cloudinary.com/dcy2gdxzq/video/upload/v1777026973/PIXEL_PRODUCTIONS_-_ACCORDING_TO_NICOLE_SAMPLE_VIDEO_efhjsv.mp4" },
+    { title: "Unique Re-edit", category: "Motion Graphics", year: "'26", img: "https://res.cloudinary.com/dcy2gdxzq/image/upload/v1777026676/PIXEL_PRODUCTIONS_-_ACCORDING_TO_NICOLE_SAMPLE_VIDEO.00_00_18_23.Still002_b8vj4t.png", video: "https://res.cloudinary.com/dcy2gdxzq/video/upload/v1777026926/PIXEL_PRODUCTIONS_-_ACCORDING_TO_NICOLE_SAMPLE_VIDEO_1_znyumz.mp4" },
   ];
 
   return (
