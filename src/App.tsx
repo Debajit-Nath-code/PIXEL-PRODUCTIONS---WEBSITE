@@ -1,7 +1,8 @@
 import { motion, useScroll, useTransform, AnimatePresence } from 'motion/react';
-import { ArrowRight, ArrowUpRight, Play, Mail, Instagram, Twitter, Linkedin, ArrowLeft, Pause, Volume2, VolumeX, X } from 'lucide-react';
+import { ArrowRight, ArrowUpRight, Play, Instagram, Twitter, Linkedin, ArrowLeft, Pause, Volume2, VolumeX, X } from 'lucide-react';
 import React, { useRef, useEffect, useState, useId } from 'react';
 import { Routes, Route, Link, useParams, useLocation } from 'react-router-dom';
+import ContactSection from './components/ContactSection';
 
 // --- COMPONENTS ---
 
@@ -287,13 +288,13 @@ const Navbar = () => {
       </div>
 
       <div className="flex items-center space-x-4 md:space-x-6">
-        <a href="https://www.instagram.com/pixelproductions01" className="hover:text-brand-yellow transition-colors" aria-label="Instagram">
+        <a href="#" className="hover:text-brand-yellow transition-colors" aria-label="Instagram">
           <Instagram className="w-5 h-5" />
         </a>
-        <a href="https://x.com/PixelProdu62210" className="hover:text-brand-yellow transition-colors" aria-label="Twitter">
+        <a href="#" className="hover:text-brand-yellow transition-colors" aria-label="Twitter">
           <Twitter className="w-5 h-5" />
         </a>
-        <a href="www.linkedin.com/in/pixel-productions-74a76838b" className="hover:text-brand-yellow transition-colors" aria-label="LinkedIn">
+        <a href="#" className="hover:text-brand-yellow transition-colors" aria-label="LinkedIn">
           <Linkedin className="w-5 h-5" />
         </a>
       </div>
@@ -387,7 +388,7 @@ const Hero = () => {
         <motion.div 
           initial={{ scaleX: 0 }}
           animate={{ scaleX: 1 }}
-          transition={{ duration: 1, ease: "circOut", delay: 0.6 }}
+          transition={{ duration: 1, ease: "circOut", delay: 0.2 }}
           className="absolute top-1/2 left-0 w-[80%] md:w-[60%] h-32 md:h-64 bg-brand-purple -translate-y-1/2 z-0 origin-left"
         />
 
@@ -401,8 +402,8 @@ const Hero = () => {
           <div className="aspect-[16/9] bg-gray-200 relative overflow-hidden">
             <ProjectVideo 
                project={{
-                   video: "https://res.cloudinary.com/dcy2gdxzq/video/upload/v1777024145/SHOWREEL_2026_PIXEL_PRODUCTIONS_compressed_yrsfqy.mp4",
-                   img: "https://res.cloudinary.com/dcy2gdxzq/image/upload/v1777024551/thumb_1_ziaxjd.png"
+                   video: "https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+                   img: "https://picsum.photos/seed/cyberpunk/1920/1080?grayscale"
                }}
                className="w-full h-full"
                isHero={true}
@@ -434,13 +435,18 @@ const Hero = () => {
 };
 
 const Projects = () => {
-  const projects = [
-    { title: "Ecom Accelarator", category: "High Paced", year: "'26", img: "https://res.cloudinary.com/dcy2gdxzq/image/upload/v1777025983/short_1_finished.00_00_17_26.Still001_pnjhch.png", video: "https://res.cloudinary.com/dcy2gdxzq/video/upload/v1777025905/short_1_finished_qbvi86.mp4" },
-    { title: "Trading Guide", category: "Smooth Animations", year: "'26", img: "https://res.cloudinary.com/dcy2gdxzq/image/upload/v1777025976/O-_EDITED_VIDEO.00_00_07_06.Still001_akoovs.png", video: "https://res.cloudinary.com/dcy2gdxzq/video/upload/v1777025803/O-_EDITED_VIDEO_okdfp9.mp4" },
-    { title: "Ecom Accelarator", category: "High Paced", year: "'25", img: "https://res.cloudinary.com/dcy2gdxzq/image/upload/v1777025935/GAP_Insurance_Peep_This_-_edited_version_DENJIeditz.00_00_01_34.Still001_salekc.png", video: "https://res.cloudinary.com/dcy2gdxzq/video/upload/v1777025777/GAP_Insurance_Peep_This_-_edited_version_DENJIeditz_nu8hll.mp4" },
-    { title: "Trading Guide", category: "Smooth Animations", year: "'25", img: "https://res.cloudinary.com/dcy2gdxzq/image/upload/v1777025976/O-_EDITED_VIDEO.00_00_07_06.Still001_akoovs.png", video: "https://res.cloudinary.com/dcy2gdxzq/video/upload/v1777025803/O-_EDITED_VIDEO_okdfp9.mp4" },
-    { title: "Dead Internet", category: "Explainer", year: "'26", img: "https://res.cloudinary.com/dcy2gdxzq/image/upload/v1777026679/PIXEL_PRODUCTIONS_-_ACCORDING_TO_NICOLE_SAMPLE_VIDEO.00_00_19_01.Still001_lvnoqh.png", video: "https://res.cloudinary.com/dcy2gdxzq/video/upload/v1777026973/PIXEL_PRODUCTIONS_-_ACCORDING_TO_NICOLE_SAMPLE_VIDEO_efhjsv.mp4" },
-    { title: "Unique Re-edit", category: "Motion Graphics", year: "'26", img: "https://res.cloudinary.com/dcy2gdxzq/image/upload/v1777026676/PIXEL_PRODUCTIONS_-_ACCORDING_TO_NICOLE_SAMPLE_VIDEO.00_00_18_23.Still002_b8vj4t.png", video: "https://res.cloudinary.com/dcy2gdxzq/video/upload/v1777026926/PIXEL_PRODUCTIONS_-_ACCORDING_TO_NICOLE_SAMPLE_VIDEO_1_znyumz.mp4" },
+  const longFormProjects = [
+    { title: "Velocity", category: "Automotive Integration", metric: "2.4M Views // +15% CTR", img: "https://picsum.photos/seed/car/1000/600?grayscale", video: "https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" },
+    { title: "Vogue Subculture", category: "Docuseries", metric: "35 Min AVD", img: "https://picsum.photos/seed/fashion/800/600?grayscale", video: "https://storage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4" },
+    { title: "Urban Odyssey", category: "Creator VLOG", metric: "Trending #4", img: "https://picsum.photos/seed/urban/1000/600?grayscale", video: "https://storage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4" },
+    { title: "Cosmic Resonance", category: "Brand Anthem", metric: "70% Retention", img: "https://picsum.photos/seed/cosmic/1000/600?grayscale", video: "https://storage.googleapis.com/gtv-videos-bucket/sample/SubaruOutbackOnStreetAndDirt.mp4" },
+  ];
+
+  const shortFormProjects = [
+    { title: "Neon Nights", category: "TikTok Campaign", metric: "4.2M Views", img: "https://picsum.photos/seed/neon/800/1200?grayscale", video: "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" },
+    { title: "Echoes of Silence", category: "Reels Series", metric: "+10k Followers", img: "https://picsum.photos/seed/silence/800/1200?grayscale", video: "https://storage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4" },
+    { title: "Elevate", category: "Shorts Promo", metric: "95% Watch Through", img: "https://picsum.photos/seed/elevate/800/1200?grayscale", video: "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4" },
+    { title: "Raw Energy", category: "Ad Creative", metric: "3x ROAS", img: "https://picsum.photos/seed/raw/800/1200?grayscale", video: "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4" },
   ];
 
   return (
@@ -448,37 +454,81 @@ const Projects = () => {
       <div className="max-w-[1800px] mx-auto">
         <div className="flex flex-col md:flex-row justify-between items-end mb-24 border-b border-gray-200 pb-8">
             <h2 className="font-display font-bold text-5xl md:text-7xl lg:text-9xl tracking-tighter uppercase">Selected<br/>Works.</h2>
-            <p className="font-sans text-xs uppercase tracking-widest text-gray-400 mt-8 md:mt-0 max-w-[200px] text-right">A highlight reel of things I probably spent way too much time perfecting.</p>
+            <p className="font-sans text-xs uppercase tracking-widest text-gray-400 mt-8 md:mt-0 max-w-[200px] text-right">Case studies of content engineered for high retention and scale.</p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-y-24 gap-x-12 md:gap-x-24">
-          {projects.map((project, idx) => (
-            <motion.div 
-              key={idx}
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.6, delay: idx * 0.1 }}
-              className={`group cursor-pointer ${
-                idx === 1 ? 'md:mt-48' :
-                idx === 2 ? 'md:-mt-48' : ''
-              }`}
-            >
-              <ProjectVideo 
-                 project={project} 
-                 className={`${idx >= 2 ? 'aspect-video md:aspect-[16/9]' : 'aspect-[9/16]'}`} 
-                 useModal={true}
-              />
-              
-              <div className="flex justify-between items-start mt-6">
-                 <div>
-                     <h3 className="font-display font-bold text-2xl md:text-3xl uppercase tracking-tight">{project.title}</h3>
-                     <p className="text-gray-500 text-sm mt-1 uppercase tracking-widest">{project.category}</p>
-                 </div>
-                 <span className="font-mono text-sm text-gray-400">{project.year}</span>
-              </div>
-            </motion.div>
-          ))}
+        {/* Long Form Projects */}
+        <div className="mb-32">
+          <div className="flex items-end gap-6 mb-16">
+            <h3 className="font-display font-bold text-3xl md:text-5xl tracking-tight uppercase">Long Form</h3>
+            <div className="flex-1 h-[2px] bg-gray-100 mb-2 md:mb-3"></div>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-y-24 gap-x-12 md:gap-x-24">
+            {longFormProjects.map((project, idx) => (
+              <motion.div 
+                key={`long-${idx}`}
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ duration: 0.6, delay: idx * 0.1 }}
+                className={`group cursor-pointer ${
+                  idx % 2 !== 0 ? 'md:mt-32' : ''
+                }`}
+              >
+                <ProjectVideo 
+                   project={project} 
+                   className="aspect-video md:aspect-[16/9]" 
+                   useModal={true}
+                />
+                
+                <div className="flex justify-between items-start mt-6">
+                   <div>
+                       <h3 className="font-display font-bold text-2xl md:text-3xl uppercase tracking-tight">{project.title}</h3>
+                       <p className="text-gray-500 text-sm mt-1 uppercase tracking-widest">{project.category}</p>
+                   </div>
+                   <span className="font-mono text-xs text-brand-purple bg-brand-purple/10 px-3 py-1 rounded-sm border border-brand-purple/20 whitespace-nowrap">{project.metric}</span>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+
+        {/* Short Form Projects */}
+        <div>
+          <div className="flex items-end gap-6 mb-16">
+            <h3 className="font-display font-bold text-3xl md:text-5xl tracking-tight uppercase">Short Form</h3>
+            <div className="flex-1 h-[2px] bg-gray-100 mb-2 md:mb-3"></div>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-y-16 gap-x-6 md:gap-x-8">
+            {shortFormProjects.map((project, idx) => (
+              <motion.div 
+                key={`short-${idx}`}
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ duration: 0.6, delay: idx * 0.1 }}
+                className={`group cursor-pointer ${
+                  idx % 2 !== 0 ? 'sm:mt-16 lg:mt-24' : 'lg:mt-0'
+                }`}
+              >
+                <ProjectVideo 
+                   project={project} 
+                   className="aspect-[9/16] w-full" 
+                   useModal={true}
+                />
+                
+                <div className="flex justify-between items-start mt-6 w-full">
+                   <div>
+                       <h3 className="font-display font-bold text-xl uppercase tracking-tight">{project.title}</h3>
+                       <p className="text-gray-500 text-xs mt-1 uppercase tracking-widest mb-3">{project.category}</p>
+                       <span className="font-mono text-[10px] text-brand-purple bg-brand-purple/10 px-2 py-1 flex w-fit rounded-sm border border-brand-purple/20">{project.metric}</span>
+                   </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
@@ -500,15 +550,15 @@ const FeaturedWork = () => {
              <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
                  
                  <div className="lg:col-span-4 flex flex-col">
-                     <p className="font-display text-brand-yellow text-xs uppercase tracking-[0.3em] font-bold mb-4">Spotlight</p>
+                     <p className="font-display text-brand-yellow text-xs uppercase tracking-[0.3em] font-bold mb-4">Case Study</p>
                      <h2 className="font-display font-bold text-6xl md:text-7xl xl:text-8xl tracking-tight uppercase leading-none mb-8">
                          The <br/><span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-purple to-purple-400">Void</span>
                      </h2>
                      <p className="text-gray-400 text-sm leading-relaxed max-w-sm mb-12">
-                         Getting a little weird with time and space. Think aggressive jump cuts meets buttery smooth speed ramps. Don't try this at home.
+                         A masterclass in tension building. We used aggressive jump cuts combined with buttery smooth speed ramps to keep viewer retention above 85% for the first 3 minutes.
                      </p>
                      <button className="flex items-center gap-4 text-brand-yellow hover:text-white transition-colors uppercase tracking-widest text-xs font-bold w-fit pb-2 border-b border-brand-yellow hover:border-white">
-                         Watch Full Case Study <ArrowRight className="w-4 h-4" />
+                         View Performance Metrics <ArrowRight className="w-4 h-4" />
                      </button>
                  </div>
 
@@ -542,19 +592,19 @@ const FeaturedWork = () => {
 
 const Services = () => {
   const services = [
-    { id: 'short-form', num: '01', title: 'Short Form\nEditing', desc: 'Bite-sized bangers designed to hijack attention spans and break the algorithm.' },
-    { id: 'long-form', num: '02', title: 'Long Form\nEditing', desc: 'Sticking the totally-not-boring pieces together for documentaries, essays, and films that actually slaps.' },
-    { id: 'motion-design', num: '03', title: 'Motion\nDesign', desc: 'Making words dance and adding those sneaky VFX tweaks you didn\'t even know you needed.' },
+    { id: 'short-form', num: '01', title: 'Viral Short\nForm', desc: 'High-retention Shorts, Reels, and TikToks engineered with ruthless pacing and visual hooks to hack the algorithm and scale your audience.' },
+    { id: 'long-form', num: '02', title: 'Premium Long\nForm', desc: 'Documentaries, video essays, and deep-dives that keep viewers glued. Turning standard footage into highly aesthetic, authoritative content.' },
+    { id: 'motion-design', num: '03', title: 'Motion & VFX\nIntegration', desc: 'Custom graphics, seamless transitions, and visual effects that elevate your brand from "just a YouTuber" to a premium media company.' },
   ];
 
   return (
-    <section id="services" className="py-32 px-6 md:px-12 max-w-[1800px] mx-auto bg-white">
-      <div className="border-t border-black pt-12 flex flex-col lg:flex-row justify-between lg:items-start gap-16">
+    <section id="services" className="py-32 px-6 md:px-12 max-w-[1800px] mx-auto bg-white border-t border-gray-200">
+      <div className="pt-12 flex flex-col lg:flex-row justify-between lg:items-start gap-16">
         
         <div className="lg:w-1/3">
           <h2 className="font-display font-bold text-4xl md:text-5xl uppercase tracking-tighter">Capabilities.</h2>
           <p className="mt-6 text-gray-500 text-sm leading-relaxed max-w-xs">
-              Making your footage look 100x better. No magic wands, just a ridiculous amount of keyframes.
+              We focus on one thing: making your footage retain viewers. No magic wands, just a strategic understanding of platform psychology.
           </p>
         </div>
 
@@ -585,30 +635,6 @@ const Services = () => {
   );
 };
 
-const Contact = () => {
-    return (
-        <section className="bg-brand-purple relative overflow-hidden text-white mt-12 py-32 px-6 md:px-12 flex flex-col items-center justify-center min-h-[60vh] text-center">
-            {/* Background Texture/glow */}
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-white/10 via-transparent to-transparent opacity-50 blur-2xl"></div>
-            
-            <div className="relative z-10 w-full max-w-[1200px]">
-                <p className="font-mono text-brand-yellow uppercase tracking-widest text-sm mb-6">Available for bookings '26</p>
-                <h2 className="font-display font-bold text-[10vw] leading-none tracking-tighter uppercase mb-12 mix-blend-overlay">
-                    Let's Build.
-                </h2>
-                
-                <a href="mailto:pixelproductions170@gmail.com" className="inline-flex items-center gap-4 bg-brand-yellow text-black px-8 py-5 font-bold uppercase tracking-widest text-sm hover:scale-105 transition-transform hover:shadow-[0_0_40px_rgba(255,214,0,0.4)]">
-                   <Mail className="w-5 h-5" /> Start a Conversation
-                </a>
-            </div>
-            
-            <div className="absolute bottom-6 left-6 right-6 flex justify-between items-center text-[10px] font-mono tracking-widest uppercase opacity-50">
-                <p>Based in TR // Working GC</p>
-                <p>&copy; {new Date().getFullYear()} PIXEL PRODUCTIONS.</p>
-            </div>
-        </section>
-    )
-}
 
 // --- PAGES ---
 
@@ -721,7 +747,7 @@ export default function App() {
           <Route path="/service/:id" element={<ServicePage />} />
       </Routes>
       
-      <Contact />
+      <ContactSection />
     </div>
   );
 }
