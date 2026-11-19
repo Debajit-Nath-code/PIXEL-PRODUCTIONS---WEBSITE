@@ -402,8 +402,8 @@ const Hero = () => {
           <div className="aspect-[16/9] bg-gray-200 relative overflow-hidden">
             <ProjectVideo 
                project={{
-                   video: "https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
-                   img: "https://picsum.photos/seed/cyberpunk/1920/1080?grayscale"
+                   video: "https://res.cloudinary.com/dcy2gdxzq/video/upload/v1777024145/SHOWREEL_2026_PIXEL_PRODUCTIONS_compressed_yrsfqy.mp4",
+                   img: "https://res.cloudinary.com/dcy2gdxzq/image/upload/v1777024551/thumb_1_ziaxjd.png"
                }}
                className="w-full h-full"
                isHero={true}
@@ -436,17 +436,17 @@ const Hero = () => {
 
 const Projects = () => {
   const longFormProjects = [
-    { title: "Velocity", category: "Automotive Integration", img: "https://picsum.photos/seed/car/1000/600?grayscale", video: "https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" },
-    { title: "Vogue Subculture", category: "Docuseries", img: "https://picsum.photos/seed/fashion/800/600?grayscale", video: "https://storage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4" },
-    { title: "Urban Odyssey", category: "Creator VLOG", img: "https://picsum.photos/seed/urban/1000/600?grayscale", video: "https://storage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4" },
+    { title: "According to Nicole", category: "Talking Head Re-edit", img: "https://res.cloudinary.com/dcy2gdxzq/image/upload/v1777026679/PIXEL_PRODUCTIONS_-_ACCORDING_TO_NICOLE_SAMPLE_VIDEO.00_00_19_01.Still001_lvnoqh.png", video: "https://res.cloudinary.com/dcy2gdxzq/video/upload/v1777026973/PIXEL_PRODUCTIONS_-_ACCORDING_TO_NICOLE_SAMPLE_VIDEO_efhjsv.mp4" },
+    { title: "Editing Re-edit", category: "Motion Design", img: "https://res.cloudinary.com/dcy2gdxzq/image/upload/v1777026676/PIXEL_PRODUCTIONS_-_ACCORDING_TO_NICOLE_SAMPLE_VIDEO.00_00_18_23.Still002_b8vj4t.png", video: "https://res.cloudinary.com/dcy2gdxzq/video/upload/v1777026926/PIXEL_PRODUCTIONS_-_ACCORDING_TO_NICOLE_SAMPLE_VIDEO_1_znyumz.mp4" },
+    { title: "Back Pain", category: "Fitness Guide", img: "https://res.cloudinary.com/dcy2gdxzq/image/upload/v1777026669/PIXEL_PRODUCTIONS_-_ACCORDING_TO_NICOLE_SAMPLE_VIDEO.00_00_06_19.Still003_fpkjbj.png", video: "https://res.cloudinary.com/dcy2gdxzq/video/upload/v1777026819/PIXEL_PRODUCTIONS_-_ACCORDING_TO_NICOLE_SAMPLE_VIDEO_2_bvggy3.mp4" },
     { title: "Cosmic Resonance", category: "Brand Anthem", img: "https://picsum.photos/seed/cosmic/1000/600?grayscale", video: "https://storage.googleapis.com/gtv-videos-bucket/sample/SubaruOutbackOnStreetAndDirt.mp4" },
   ];
 
   const shortFormProjects = [
-    { title: "Neon Nights", category: "TikTok Campaign", img: "https://picsum.photos/seed/neon/800/1200?grayscale", video: "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" },
-    { title: "Echoes of Silence", category: "Reels Series", img: "https://picsum.photos/seed/silence/800/1200?grayscale", video: "https://storage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4" },
+    { title: "Trading Community Promo", category: "TikTok Campaign", img: "https://res.cloudinary.com/dcy2gdxzq/image/upload/v1777025976/O-_EDITED_VIDEO.00_00_07_06.Still001_akoovs.png", video: "https://res.cloudinary.com/dcy2gdxzq/video/upload/v1777025803/O-_EDITED_VIDEO_okdfp9.mp4" },
+    { title: "Ecom Accelerator", category: "AI Product Ad", img: "https://res.cloudinary.com/dcy2gdxzq/image/upload/v1777025983/short_1_finished.00_00_17_26.Still001_pnjhch.png", video: "https://res.cloudinary.com/dcy2gdxzq/video/upload/v1777025905/short_1_finished_qbvi86.mp4" },
     { title: "Elevate", category: "Shorts Promo", img: "https://picsum.photos/seed/elevate/800/1200?grayscale", video: "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4" },
-    { title: "Raw Energy", category: "Ad Creative", img: "https://picsum.photos/seed/raw/800/1200?grayscale", video: "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4" },
+    { title: "GAP Insurance", category: "Shorts Content", img: "https://res.cloudinary.com/dcy2gdxzq/image/upload/v1777025935/GAP_Insurance_Peep_This_-_edited_version_DENJIeditz.00_00_01_34.Still001_salekc.png", video: "https://res.cloudinary.com/dcy2gdxzq/video/upload/v1777025777/GAP_Insurance_Peep_This_-_edited_version_DENJIeditz_nu8hll.mp4" },
   ];
 
   return (
