@@ -436,17 +436,17 @@ const Hero = () => {
 
 const Projects = () => {
   const longFormProjects = [
-    { title: "Velocity", category: "Automotive Integration", metric: "2.4M Views // +15% CTR", img: "https://picsum.photos/seed/car/1000/600?grayscale", video: "https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" },
-    { title: "Vogue Subculture", category: "Docuseries", metric: "35 Min AVD", img: "https://picsum.photos/seed/fashion/800/600?grayscale", video: "https://storage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4" },
-    { title: "Urban Odyssey", category: "Creator VLOG", metric: "Trending #4", img: "https://picsum.photos/seed/urban/1000/600?grayscale", video: "https://storage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4" },
-    { title: "Cosmic Resonance", category: "Brand Anthem", metric: "70% Retention", img: "https://picsum.photos/seed/cosmic/1000/600?grayscale", video: "https://storage.googleapis.com/gtv-videos-bucket/sample/SubaruOutbackOnStreetAndDirt.mp4" },
+    { title: "Velocity", category: "Automotive Integration", img: "https://picsum.photos/seed/car/1000/600?grayscale", video: "https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" },
+    { title: "Vogue Subculture", category: "Docuseries", img: "https://picsum.photos/seed/fashion/800/600?grayscale", video: "https://storage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4" },
+    { title: "Urban Odyssey", category: "Creator VLOG", img: "https://picsum.photos/seed/urban/1000/600?grayscale", video: "https://storage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4" },
+    { title: "Cosmic Resonance", category: "Brand Anthem", img: "https://picsum.photos/seed/cosmic/1000/600?grayscale", video: "https://storage.googleapis.com/gtv-videos-bucket/sample/SubaruOutbackOnStreetAndDirt.mp4" },
   ];
 
   const shortFormProjects = [
-    { title: "Neon Nights", category: "TikTok Campaign", metric: "4.2M Views", img: "https://picsum.photos/seed/neon/800/1200?grayscale", video: "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" },
-    { title: "Echoes of Silence", category: "Reels Series", metric: "+10k Followers", img: "https://picsum.photos/seed/silence/800/1200?grayscale", video: "https://storage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4" },
-    { title: "Elevate", category: "Shorts Promo", metric: "95% Watch Through", img: "https://picsum.photos/seed/elevate/800/1200?grayscale", video: "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4" },
-    { title: "Raw Energy", category: "Ad Creative", metric: "3x ROAS", img: "https://picsum.photos/seed/raw/800/1200?grayscale", video: "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4" },
+    { title: "Neon Nights", category: "TikTok Campaign", img: "https://picsum.photos/seed/neon/800/1200?grayscale", video: "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" },
+    { title: "Echoes of Silence", category: "Reels Series", img: "https://picsum.photos/seed/silence/800/1200?grayscale", video: "https://storage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4" },
+    { title: "Elevate", category: "Shorts Promo", img: "https://picsum.photos/seed/elevate/800/1200?grayscale", video: "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4" },
+    { title: "Raw Energy", category: "Ad Creative", img: "https://picsum.photos/seed/raw/800/1200?grayscale", video: "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4" },
   ];
 
   return (
@@ -454,7 +454,7 @@ const Projects = () => {
       <div className="max-w-[1800px] mx-auto">
         <div className="flex flex-col md:flex-row justify-between items-end mb-24 border-b border-gray-200 pb-8">
             <h2 className="font-display font-bold text-5xl md:text-7xl lg:text-9xl tracking-tighter uppercase">Selected<br/>Works.</h2>
-            <p className="font-sans text-xs uppercase tracking-widest text-gray-400 mt-8 md:mt-0 max-w-[200px] text-right">Case studies of content engineered for high retention and scale.</p>
+            <p className="font-sans text-xs uppercase tracking-widest text-gray-400 mt-8 md:mt-0 max-w-[200px] text-right">A curated collection of long-form edits and short-form cuts.</p>
         </div>
 
         {/* Long Form Projects */}
@@ -487,7 +487,6 @@ const Projects = () => {
                        <h3 className="font-display font-bold text-2xl md:text-3xl uppercase tracking-tight">{project.title}</h3>
                        <p className="text-gray-500 text-sm mt-1 uppercase tracking-widest">{project.category}</p>
                    </div>
-                   <span className="font-mono text-xs text-brand-purple bg-brand-purple/10 px-3 py-1 rounded-sm border border-brand-purple/20 whitespace-nowrap">{project.metric}</span>
                 </div>
               </motion.div>
             ))}
@@ -522,8 +521,7 @@ const Projects = () => {
                 <div className="flex justify-between items-start mt-6 w-full">
                    <div>
                        <h3 className="font-display font-bold text-xl uppercase tracking-tight">{project.title}</h3>
-                       <p className="text-gray-500 text-xs mt-1 uppercase tracking-widest mb-3">{project.category}</p>
-                       <span className="font-mono text-[10px] text-brand-purple bg-brand-purple/10 px-2 py-1 flex w-fit rounded-sm border border-brand-purple/20">{project.metric}</span>
+                       <p className="text-gray-500 text-xs mt-1 uppercase tracking-widest">{project.category}</p>
                    </div>
                 </div>
               </motion.div>
@@ -550,15 +548,15 @@ const FeaturedWork = () => {
              <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
                  
                  <div className="lg:col-span-4 flex flex-col">
-                     <p className="font-display text-brand-yellow text-xs uppercase tracking-[0.3em] font-bold mb-4">Case Study</p>
+                     <p className="font-display text-brand-yellow text-xs uppercase tracking-[0.3em] font-bold mb-4">Spotlight</p>
                      <h2 className="font-display font-bold text-6xl md:text-7xl xl:text-8xl tracking-tight uppercase leading-none mb-8">
                          The <br/><span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-purple to-purple-400">Void</span>
                      </h2>
                      <p className="text-gray-400 text-sm leading-relaxed max-w-sm mb-12">
-                         A masterclass in tension building. We used aggressive jump cuts combined with buttery smooth speed ramps to keep viewer retention above 85% for the first 3 minutes.
+                         A masterclass in tension building. Aggressive jump cuts combined with buttery smooth speed ramps for relentless visual momentum.
                      </p>
                      <button className="flex items-center gap-4 text-brand-yellow hover:text-white transition-colors uppercase tracking-widest text-xs font-bold w-fit pb-2 border-b border-brand-yellow hover:border-white">
-                         View Performance Metrics <ArrowRight className="w-4 h-4" />
+                         Watch Full Case Study <ArrowRight className="w-4 h-4" />
                      </button>
                  </div>
 
